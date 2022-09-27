@@ -7,10 +7,11 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Web;
+#pragma warning disable
 
 namespace Sendpulse_rest_api.restapi
 {
-    class Sendpulse :SendpulseInterface
+    public class Sendpulse :SendpulseInterface
     {
         private string apiurl = "https://api.sendpulse.com";
         private string userId = null;
@@ -276,6 +277,89 @@ namespace Sendpulse_rest_api.restapi
             }
 
             return response;
+        }
+        
+
+               /// <summary>
+        /// Sends JSON request to API service.
+        /// Supporte HTTP methods is GET and POST.
+        /// </summary>
+        /// <param name="endpoint">string Endpoint</param>
+        /// <param name="method">HttpMethod method</param>
+        /// <param name="data">object data</param>
+        /// <param name="useToken">bool useToken</param>
+        /// <returns>Dictionary</returns>
+        /// <exception cref="NotSupportedException">When passed not supported HTTP method</exception>
+        public string sendRawJsonRequest(string endpoint, HttpMethod method, object data, bool useToken = true)
+        {
+            if(method != HttpMethod.Get && method != HttpMethod.Post)
+                throw new NotSupportedException("Method " + method.ToString() + " not supported yet!");
+
+            Dictionary<string, object> response = new Dictionary<string, object>();
+            string strReturn;
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(data,
+                    new JsonSerializerSettings() {NullValueHandling = NullValueHandling.Ignore});
+
+                HttpWebRequest webRequest = (HttpWebRequest) WebRequest.Create(this.apiurl + "/" + endpoint);
+                webRequest.Method = method.ToString();
+
+                if (useToken && this.tokenName != null)
+                    webRequest.Headers.Add("Authorization", "Bearer " + this.tokenName);
+
+                if (method != HttpMethod.Get)
+                {
+                    byte[] buffer = Encoding.ASCII.GetBytes(json);
+                    webRequest.ContentType = "application/json";
+                    webRequest.ContentLength = buffer.Length;
+                    Stream postData = webRequest.GetRequestStream();
+                    postData.Write(buffer, 0, buffer.Length);
+                    postData.Close();
+                }
+
+                try
+                {
+                    HttpWebResponse webResponse = (HttpWebResponse) webRequest.GetResponse();
+                    HttpStatusCode status = webResponse.StatusCode;
+                    response.Add("http_code", (int) status);
+
+                    if (status == HttpStatusCode.Unauthorized && this.refreshToken == 0)
+                    {
+                        this.refreshToken += 1;
+                        this.getToken();
+                        response = this.sendJSONRequest(endpoint, method, data, true);
+                    }
+                    else
+                    {
+                        Stream responseStream = webResponse.GetResponseStream();
+                        using (StreamReader streamReader = new StreamReader(responseStream))
+                        {
+                            strReturn = streamReader.ReadToEnd();
+                        }
+                        return strReturn;
+                    }
+                }
+                catch (WebException ex)
+                {
+                    HttpStatusCode statusCode = ((HttpWebResponse) ex.Response).StatusCode;
+                    response.Add("http_code", (int) statusCode);
+                    Stream responseStream = ((HttpWebResponse) ex.Response).GetResponseStream();
+                    using (StreamReader streamReader = new StreamReader(responseStream))
+                    {
+                        strReturn = streamReader.ReadToEnd();
+                    }
+
+                    return strReturn;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return null;
         }
         
         /// <summary>
@@ -1555,12 +1639,12 @@ namespace Sendpulse_rest_api.restapi
             }
         }
         /// <summary>
-        /// Add phones to addreess book.
+        /// Add phones to address book.
         /// </summary>
-        /// <returns>The phones to addreess book.</returns>
+        /// <returns>The phones to address book.</returns>
         /// <param name="addressBookId">Address book identifier.</param>
         /// <param name="phones">Phones.</param>
-        public Dictionary<string, object> addPhonesToAddreessBook(int addressBookId,string phones)
+        public Dictionary<string, object> addPhonesToAddressBook(int addressBookId,string phones)
         {
             if (addressBookId <= 0) return this.handleError("Empty address book id");
             if (phones.Length == 0) return this.handleError("Empty phones");

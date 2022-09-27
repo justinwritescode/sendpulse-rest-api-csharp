@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿#pragma warning disable
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Sendpulse_rest_api.restapi;
 using System;
@@ -831,7 +832,7 @@ namespace Sendpulse_rest_api
             int bookId = 1111111;
             string phonesData = JsonConvert.SerializeObject(phones);
             Console.WriteLine("Phones {0}", phonesData);
-            Dictionary<string, object> result = sp.addPhonesToAddreessBook(bookId, phonesData);
+            Dictionary<string, object> result = sp.addPhonesToAddressBook(bookId, phonesData);
             Console.WriteLine("Response Status {0}", result["http_code"]);
             Console.WriteLine("Result {0}", result["data"]);
             Console.ReadKey();
@@ -841,19 +842,19 @@ namespace Sendpulse_rest_api
         /// Create viber campaign.
         /// </summary>
         /// <param name="sp">Sp.</param>
-        static void sendViberCampaign(Sendpulse sp)
-        {
-            Dictionary<string, object> additional = new Dictionary<string, object>();
-            JObject button = new JObject();
-            button.Add("text", "test");
-            button.Add("link", "https://test.com");
-            additional.Add("button", button);
-            int bookId = 1111111;
-            string additionalData = JsonConvert.SerializeObject(additional);
-            Dictionary<string, object> result = sp.sendViberCampaign("", bookId, "test", 1, additionalData);
-            Console.WriteLine("Response Status {0}", result["http_code"]);
-            Console.WriteLine("Result {0}", result["data"]);
-        }
+        // static void sendViberCampaign(Sendpulse sp)
+        // {
+        //     Dictionary<string, object> additional = new Dictionary<string, object>();
+        //     JObject button = new JObject();
+        //     button.Add("text", "test");
+        //     button.Add("link", "https://test.com");
+        //     additional.Add("button", button);
+        //     int bookId = 1111111;
+        //     string additionalData = JsonConvert.SerializeObject(additional);
+        //     Dictionary<string, object> result = sp.sendViberCampaign("", bookId, "test", 1, additionalData);
+        //     Console.WriteLine("Response Status {0}", result["http_code"]);
+        //     Console.WriteLine("Result {0}", result["data"]);
+        // }
         /// <summary>
         /// Gets viber campaigns list.
         /// </summary>

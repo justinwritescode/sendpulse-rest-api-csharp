@@ -411,12 +411,12 @@ namespace Sendpulse_rest_api.restapi
         /// <param name="id">Identifier.</param>
         Dictionary<string, object> deleteSmsCampaign(int id);
         /// <summary>
-        /// Add phones to addreess book.
+        /// Add phones to address book.
         /// </summary>
-        /// <returns>The phones to addreess book.</returns>
+        /// <returns>The phones to address book.</returns>
         /// <param name="addressBookId">Address book identifier.</param>
         /// <param name="phones">Phones.</param>
-        Dictionary<string, object> addPhonesToAddreessBook(int addressBookId, string phones);
+        Dictionary<string, object> addPhonesToAddressBook(int addressBookId, string phones);
         /// <summary>
         /// Send viber campaign.
         /// </summary>
