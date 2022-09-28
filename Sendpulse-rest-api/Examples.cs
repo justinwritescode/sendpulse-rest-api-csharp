@@ -10,7 +10,8 @@ using System.Text;
 
 namespace Sendpulse_rest_api
 {
-    class Examples {
+    class Examples
+    {
         //https://login.sendpulse.com/settings/#api
         private static string userId = "";
         private static string secret = "";
@@ -40,7 +41,7 @@ namespace Sendpulse_rest_api
         /// </summary>
         /// <param name="sp"></param>
         /// <param name="BookId"></param>
-        static void getBookInfo(Sendpulse sp,int BookId)
+        static void getBookInfo(Sendpulse sp, int BookId)
         {
             Dictionary<string, object> result = sp.getBookInfo(BookId); //BOOKID
             Console.WriteLine("Response Status {0}", result["http_code"]);
@@ -77,7 +78,7 @@ namespace Sendpulse_rest_api
         /// <param name="sp"></param>
         static void createAddressBook(Sendpulse sp)
         {
-            Dictionary<string, object> result = sp.createAddressBook("NEW NAME"); 
+            Dictionary<string, object> result = sp.createAddressBook("NEW NAME");
             Console.WriteLine("Response Status {0}", result["http_code"]);
             Console.WriteLine("Result {0}", result["data"]);
             Console.ReadKey();
@@ -357,7 +358,7 @@ namespace Sendpulse_rest_api
             Console.WriteLine("Result {0}", result["data"]);
             Console.ReadKey();
         }
-        
+
         /// <summary>
         /// Sending email via SendPulse SMTP
         /// </summary>
@@ -507,7 +508,7 @@ namespace Sendpulse_rest_api
         /// </summary>
         /// <param name="sp"></param>
         /// <param name="id"></param>
-        static void getpushCampaignInfo(Sendpulse sp,int id)
+        static void getpushCampaignInfo(Sendpulse sp, int id)
         {
             Dictionary<string, object> result = sp.pushCampaignInfo(id);
             Console.WriteLine("Response Status {0}", result["http_code"]);
@@ -557,7 +558,7 @@ namespace Sendpulse_rest_api
         /// <param name="siteId"></param>
         /// <param name="limit"></param>
         /// <param name="offset"></param>
-        static void pushListWebsiteSubscriptions(Sendpulse sp, int siteId,int limit, int offset)
+        static void pushListWebsiteSubscriptions(Sendpulse sp, int siteId, int limit, int offset)
         {
             Dictionary<string, object> result = sp.pushListWebsiteSubscriptions(siteId, limit, offset);
             Console.WriteLine("Response Status {0}", result["http_code"]);
@@ -582,7 +583,7 @@ namespace Sendpulse_rest_api
         /// <param name="sp"></param>
         /// <param name="siteId"></param>
         /// <param name="state"></param>
-        static void pushSetSubscriptionState(Sendpulse sp,int siteId,int state)
+        static void pushSetSubscriptionState(Sendpulse sp, int siteId, int state)
         {
             Dictionary<string, object> result = sp.pushSetSubscriptionState(siteId, state);
             Console.WriteLine("Response Status {0}", result["http_code"]);
@@ -599,7 +600,7 @@ namespace Sendpulse_rest_api
             Dictionary<string, object> data = new Dictionary<string, object>();
             Dictionary<string, object> additionaldata = new Dictionary<string, object>();
             data.Add("title", "test push");
-            data.Add("website_id", siteId); 
+            data.Add("website_id", siteId);
             data.Add("body", "test push body");
             data.Add("ttl", 300);
             additionaldata.Add("filter_browser", "Chrome");
@@ -622,7 +623,8 @@ namespace Sendpulse_rest_api
         /// Adding telephone numbers to a mailing list
         /// </summary>
         /// <param name="sp">Sp.</param>
-        static void addPhones(Sendpulse sp){
+        static void addPhones(Sendpulse sp)
+        {
             string[] phones = new string[] { "+380500000000", "+380500000001" };
             int bookId = 1111111;
             string data = JsonConvert.SerializeObject(phones);
@@ -649,10 +651,11 @@ namespace Sendpulse_rest_api
         /// Updating the list of variables by a phone number
         /// </summary>
         /// <param name="sp">Sp.</param>
-        static void updatePhones(Sendpulse sp){
+        static void updatePhones(Sendpulse sp)
+        {
             string[] phones = new string[] { "+380500000000", "+380500000001" };
             List<object> variables = new List<object>();
-            Dictionary<string,object> variable = new Dictionary<string,object>();
+            Dictionary<string, object> variable = new Dictionary<string, object>();
             variable.Add("name", "var_name");
             variable.Add("type", "string");
             variable.Add("value", "value");
@@ -660,10 +663,10 @@ namespace Sendpulse_rest_api
             string variablesData = JsonConvert.SerializeObject(variables);
             int bookId = 1111111;
             string phonesData = JsonConvert.SerializeObject(phones);
-            Dictionary<string, object> result = sp.updatePhones(bookId, phonesData,variablesData);
+            Dictionary<string, object> result = sp.updatePhones(bookId, phonesData, variablesData);
             Console.WriteLine("Response Status {0}", result["http_code"]);
             Console.WriteLine("Result {0}", result["data"]);
-            Console.ReadKey();   
+            Console.ReadKey();
         }
         /// <summary>
         /// Retrieving information for specific phone number
@@ -682,7 +685,8 @@ namespace Sendpulse_rest_api
         /// Adding telephone number to the blacklist
         /// </summary>
         /// <param name="sp">Sp.</param>
-        static void addPhonesToBlackList(Sendpulse sp){
+        static void addPhonesToBlackList(Sendpulse sp)
+        {
             string[] phones = new string[] { "+380500000000", "+380500000001" };
             string description = "Description";
             string phonesData = JsonConvert.SerializeObject(phones);
@@ -708,7 +712,8 @@ namespace Sendpulse_rest_api
         /// Viewing the blacklist
         /// </summary>
         /// <param name="sp">Sp.</param>
-        static void getBlackListPhones(Sendpulse sp){
+        static void getBlackListPhones(Sendpulse sp)
+        {
             Dictionary<string, object> result = sp.getBlackListPhones();
             Console.WriteLine("Response Status {0}", result["http_code"]);
             Console.WriteLine("Result {0}", result["data"]);
@@ -731,7 +736,8 @@ namespace Sendpulse_rest_api
         /// Creating of a campaign
         /// </summary>
         /// <param name="sp">Sp.</param>
-        static void sendSmsCampaign(Sendpulse sp){
+        static void sendSmsCampaign(Sendpulse sp)
+        {
             int bookId = 1111111;
             Dictionary<string, object> result = sp.sendSmsCampaign(bookId, "test");
             Console.WriteLine("Response Status {0}", result["http_code"]);
@@ -742,7 +748,8 @@ namespace Sendpulse_rest_api
         /// Creating a campaign to a list of phone numbers
         /// </summary>
         /// <param name="sp">Sp.</param>
-        static void sendSmsCampaignByPhones(Sendpulse sp){
+        static void sendSmsCampaignByPhones(Sendpulse sp)
+        {
             string[] phones = new string[] { "+380500000000", "+380500000001" };
             string phonesData = JsonConvert.SerializeObject(phones);
             Dictionary<string, object> result = sp.sendSmsCampaignByPhones(phonesData, "test");
@@ -795,7 +802,7 @@ namespace Sendpulse_rest_api
         {
             int bookId = 1111111;
             string sender = "sender_name";
-            Dictionary<string, object> result = sp.getSmsCampaignCost("test",sender,bookId);
+            Dictionary<string, object> result = sp.getSmsCampaignCost("test", sender, bookId);
             Console.WriteLine("Response Status {0}", result["http_code"]);
             Console.WriteLine("Result {0}", result["data"]);
             Console.ReadKey();
@@ -842,6 +849,7 @@ namespace Sendpulse_rest_api
         /// Create viber campaign.
         /// </summary>
         /// <param name="sp">Sp.</param>
+        /// <example><code>
         // static void sendViberCampaign(Sendpulse sp)
         // {
         //     Dictionary<string, object> additional = new Dictionary<string, object>();
@@ -855,6 +863,7 @@ namespace Sendpulse_rest_api
         //     Console.WriteLine("Response Status {0}", result["http_code"]);
         //     Console.WriteLine("Result {0}", result["data"]);
         // }
+        /// </code></example>
         /// <summary>
         /// Gets viber campaigns list.
         /// </summary>
