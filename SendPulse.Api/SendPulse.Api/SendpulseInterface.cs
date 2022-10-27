@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sendpulse_rest_api.restapi
+namespace SendPulse.Api
 {
-    interface SendpulseInterface
+    interface ISendPulseApi
     {
         /// <summary>
         /// Get list of address books

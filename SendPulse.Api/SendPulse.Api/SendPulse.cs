@@ -9,9 +9,9 @@ using Newtonsoft.Json.Linq;
 using System.Web;
 #pragma warning disable
 
-namespace Sendpulse_rest_api.restapi
+namespace SendPulse.Api
 {
-    public class Sendpulse : SendpulseInterface
+    public class SendPulseApi : ISendPulseApi
     {
         private const string ApiBaseUrl = "https://api.sendpulse.com";
         private int refreshToken = 0;
@@ -19,7 +19,7 @@ namespace Sendpulse_rest_api.restapi
         public string UserId { get; }
         public string TokenName { get; private set; }
 
-        public Sendpulse(string _userId, string _secret)
+        public SendPulseApi(string _userId, string _secret)
         {
             if (_userId == null || _secret == null)
             {

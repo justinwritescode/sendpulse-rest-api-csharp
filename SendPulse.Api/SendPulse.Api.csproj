@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!-- <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" /> -->
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{54580CBC-9888-483D-B6F1-AE13D4EC6AAB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sendpulse_rest_api</RootNamespace>
-    <AssemblyName>Sendpulse-rest-api</AssemblyName>
+    <RootNamespace>SendPulse.Api</RootNamespace>
+    <AssemblyName>SendPulse.Api</AssemblyName>
    <TargetFramework>net6.0</TargetFramework>
     <!-- <TargetFrameworkVersion>net6.0</TargetFrameworkVersion> -->
     <FileAlignment>512</FileAlignment>
@@ -39,10 +39,10 @@
   <ItemGroup>
     <!-- <Compile Include="Examples.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SendPulse.restapi\Converters\ViberDateTimeConverter.cs" />
-    <Compile Include="SendPulse.restapi\Sendpulse.cs" />
-    <Compile Include="SendPulse.restapi\SendpulseInterface.cs" />
-    <Compile Include="SendPulse.restapi\ViberCampaign.cs" /> -->
+    <Compile Include="SendPulse.Api\Converters\ViberDateTimeConverter.cs" />
+    <Compile Include="SendPulse.Api\Sendpulse.cs" />
+    <Compile Include="SendPulse.Api\SendpulseInterface.cs" />
+    <Compile Include="SendPulse.Api\ViberCampaign.cs" /> -->
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

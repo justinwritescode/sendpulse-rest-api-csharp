@@ -2,14 +2,14 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Sendpulse_rest_api.restapi.Converters
+namespace SendPulse.Api.Converters
 {
-    public class ViberDateTimeConverter: DateTimeConverterBase
+    public class ViberDateTimeConverter : DateTimeConverterBase
     {
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            DateTime dt = (DateTime) value;
+            DateTime dt = (DateTime)value;
 
             if (dt == DateTime.Now || dt < DateTime.Now)
             {
