@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SendPulse.Api</RootNamespace>
     <AssemblyName>SendPulse.Api</AssemblyName>
-   <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <!-- <TargetFrameworkVersion>net6.0</TargetFrameworkVersion> -->
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-   <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
     <!-- <Compile Include="Examples.cs" />
@@ -43,6 +43,10 @@
     <Compile Include="SendPulse.Api\Sendpulse.cs" />
     <Compile Include="SendPulse.Api\SendpulseInterface.cs" />
     <Compile Include="SendPulse.Api\ViberCampaign.cs" /> -->
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
